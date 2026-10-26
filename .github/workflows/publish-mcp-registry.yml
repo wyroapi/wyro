@@ -1,0 +1,24 @@
+# Publishes server.json to the official MCP registry (registry.modelcontextprotocol.io).
+# Auth is GitHub OIDC: this repo lives in the wyroapi org, so it may publish io.github.wyroapi/*.
+# No token or secret needed. Bump "version" in server.json (and packages[].version) before each run.
+name: publish-mcp-registry
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mcp-publisher
+        run: curl -sSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz mcp-publisher
+      - run: ./mcp-publisher validate
+      - run: ./mcp-publisher login github-oidc
+      - run: ./mcp-publisher publish
+      - name: Show the registry entry
+        run: curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=io.github.wyroapi/wyro" | tee -a "$GITHUB_STEP_SUMMARY"
