@@ -1,0 +1,8 @@
+{
+  "name": "wyro-node-quickstart",
+  "private": true,
+  "type": "module",
+  "description": "Publica en Instagram, LinkedIn y más desde Node.js con wyro, sin dependencias.",
+  "scripts": { "start": "node --env-file-if-exists=.env publicar.mjs" },
+  "engines": { "node": ">=20.6" }
+}

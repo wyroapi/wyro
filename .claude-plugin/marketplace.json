@@ -1,0 +1,12 @@
+{
+  "name": "wyro",
+  "owner": { "name": "wyro" },
+  "metadata": { "description": "Plugins de wyro para Claude Code: publica en redes sociales desde tu agente." },
+  "plugins": [
+    {
+      "name": "wyro",
+      "source": "./plugins/wyro",
+      "description": "Publica y programa posts en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest desde Claude Code. Prueba gratis sin registro."
+    }
+  ]
+}

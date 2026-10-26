@@ -1,0 +1,93 @@
+{
+  "name": "Publicar en redes con wyro",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "6f1d6b0e-1c1a-4c55-9b49-0a6f3d0f8a01",
+      "name": "Cuando hago clic en Probar",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b1e4c7a2-5d3f-4e8a-9c21-7f0d2a6b9e11",
+              "name": "texto",
+              "value": "Hola desde mi flujo de n8n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6f1d6b0e-1c1a-4c55-9b49-0a6f3d0f8a02",
+      "name": "Texto del post (o tu nodo de IA)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://wyroapi.vercel.app/v1/posts",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer TU_CLAVE"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"text\": {{ JSON.stringify($json.texto) }}, \"platforms\": [\"linkedin\"]}",
+        "options": {}
+      },
+      "id": "6f1d6b0e-1c1a-4c55-9b49-0a6f3d0f8a03",
+      "name": "Publicar con wyro",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Cuando hago clic en Probar": {
+      "main": [
+        [
+          {
+            "node": "Texto del post (o tu nodo de IA)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Texto del post (o tu nodo de IA)": {
+      "main": [
+        [
+          {
+            "node": "Publicar con wyro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
