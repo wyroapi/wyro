@@ -1,6 +1,6 @@
 # wyro · Python quickstart
 
-Publica en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest desde Python con [wyro](https://wyroapi.vercel.app). Solo biblioteca estándar.
+Publica en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest desde Python con [wyro](https://wyroapi.com). Solo biblioteca estándar.
 
 ## En 30 segundos
 
@@ -18,7 +18,7 @@ WYRO_API_KEY=wyro_sk_... python publicar.py "Lanzamos algo nuevo" instagram http
 
 Para publicar de verdad, abre el link de `next_step` y conecta tu cuenta: la misma clave pasa a real.
 
-- Documentación: https://wyroapi.vercel.app/docs/empezar
-- Referencia para agentes: https://wyroapi.vercel.app/llms.txt
+- Documentación: https://wyroapi.com/docs/empezar
+- Referencia para agentes: https://wyroapi.com/llms.txt
 
 MIT

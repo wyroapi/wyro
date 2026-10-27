@@ -3,26 +3,41 @@
   "name": "io.github.wyroapi/wyro",
   "title": "wyro API",
   "description": "Publica en Instagram, TikTok, LinkedIn, X y más desde tu agente. En español, prueba sin registro.",
-  "websiteUrl": "https://wyroapi.vercel.app",
-  "repository": { "url": "https://github.com/wyroapi/wyro", "source": "github" },
-  "version": "0.1.0",
+  "websiteUrl": "https://wyroapi.com",
+  "repository": {
+    "url": "https://github.com/wyroapi/wyro",
+    "source": "github"
+  },
+  "version": "0.1.1",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@wyroapi/mcp",
-      "version": "0.1.0",
-      "transport": { "type": "stdio" },
+      "version": "0.1.1",
+      "transport": {
+        "type": "stdio"
+      },
       "environmentVariables": [
-        { "name": "WYRO_API_KEY", "description": "Tu clave wyro_sk_... Sin ella solo funciona wyro_empezar, que crea una gratis.", "isRequired": false, "isSecret": true }
+        {
+          "name": "WYRO_API_KEY",
+          "description": "Tu clave wyro_sk_... Sin ella solo funciona wyro_empezar, que crea una gratis.",
+          "isRequired": false,
+          "isSecret": true
+        }
       ]
     }
   ],
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://wyroapi.vercel.app/mcp",
+      "url": "https://wyroapi.com/mcp",
       "headers": [
-        { "name": "Authorization", "description": "Bearer <clave>. Crea una gratis con POST /v1/sandbox", "isRequired": false, "isSecret": true }
+        {
+          "name": "Authorization",
+          "description": "Bearer <clave>. Crea una gratis con POST /v1/sandbox",
+          "isRequired": false,
+          "isSecret": true
+        }
       ]
     }
   ]

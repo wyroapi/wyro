@@ -2,7 +2,7 @@
   "mcpServers": {
     "wyro": {
       "type": "http",
-      "url": "https://wyroapi.vercel.app/mcp",
+      "url": "https://wyroapi.com/mcp",
       "headers": { "Authorization": "Bearer ${WYRO_API_KEY}" }
     }
   }

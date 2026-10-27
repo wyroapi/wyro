@@ -8,7 +8,7 @@ import sys
 import urllib.error
 import urllib.request
 
-BASE = os.environ.get("WYRO_API_URL", "https://wyroapi.vercel.app").rstrip("/")
+BASE = os.environ.get("WYRO_API_URL", "https://wyroapi.com").rstrip("/")
 
 
 def api(method, path, body=None, key=None):

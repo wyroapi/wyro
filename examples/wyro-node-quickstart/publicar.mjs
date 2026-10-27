@@ -1,6 +1,6 @@
 // Publica (o simula) un post en varias redes con wyro y espera el resultado. Sin dependencias.
 // Uso: node publicar.mjs "Texto del post" linkedin,instagram https://url/de/la/imagen.jpg
-const BASE = (process.env.WYRO_API_URL ?? "https://wyroapi.vercel.app").replace(/\/$/, "");
+const BASE = (process.env.WYRO_API_URL ?? "https://wyroapi.com").replace(/\/$/, "");
 
 async function api(method, path, body, key) {
   const res = await fetch(`${BASE}/v1${path}`, {

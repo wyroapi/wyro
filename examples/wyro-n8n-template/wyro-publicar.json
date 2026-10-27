@@ -38,7 +38,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://wyroapi.vercel.app/v1/posts",
+        "url": "https://wyroapi.com/v1/posts",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [

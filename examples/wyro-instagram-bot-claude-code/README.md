@@ -1,6 +1,6 @@
 # Bot de Instagram con Claude Code y wyro
 
-Un community manager que escribe y publica en Instagram desde Claude Code, con el tono de tu marca. Usa el servidor MCP de [wyro](https://wyroapi.vercel.app).
+Un community manager que escribe y publica en Instagram desde Claude Code, con el tono de tu marca. Usa el servidor MCP de [wyro](https://wyroapi.com).
 
 ## En 60 segundos
 
@@ -32,6 +32,6 @@ Con la clave de prueba todo es simulado: cada post devuelve un link de vista pre
 Pídele: **"Conecta mi Instagram real"**. Te da un link: entras con Google o tu email, autorizas Instagram y la misma clave publica de verdad. Antes de cada publicación real, el bot te pide confirmación.
 
 - Instagram pide una cuenta profesional (Business o Creator).
-- Documentación: https://wyroapi.vercel.app/docs/mcp
+- Documentación: https://wyroapi.com/docs/mcp
 
 MIT

@@ -7,11 +7,11 @@
 
 Publica y programa posts en **Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest** desde tu agente de IA (**Claude Code, Codex, Cursor, n8n**). Servidor MCP remoto, API REST y CLI. En español, y se prueba sin registro.
 
-*English: a remote MCP server and REST API that lets AI agents post and schedule content on 8 social networks. Free sandbox key, no sign-up. → https://wyroapi.vercel.app/en*
+*English: a remote MCP server and REST API that lets AI agents post and schedule content on 8 social networks. Free sandbox key, no sign-up. → https://wyroapi.com/en*
 
-- Web y docs: https://wyroapi.vercel.app
-- Guía para agentes: https://wyroapi.vercel.app/AGENTS.md · [llms.txt](https://wyroapi.vercel.app/llms.txt) · [OpenAPI](https://wyroapi.vercel.app/openapi.json)
-- MCP remoto (Streamable HTTP): `https://wyroapi.vercel.app/mcp`
+- Web y docs: https://wyroapi.com
+- Guía para agentes: https://wyroapi.com/AGENTS.md · [llms.txt](https://wyroapi.com/llms.txt) · [OpenAPI](https://wyroapi.com/openapi.json)
+- MCP remoto (Streamable HTTP): `https://wyroapi.com/mcp`
 - MCP por stdio: `npx -y @wyroapi/mcp`
 - CLI: `npx @wyroapi/wyro init`
 
@@ -29,7 +29,7 @@ Con el plugin (MCP, skill y el comando `/wyro:publicar`):
 O solo el MCP:
 
 ```
-claude mcp add --transport http wyro https://wyroapi.vercel.app/mcp
+claude mcp add --transport http wyro https://wyroapi.com/mcp
 ```
 
 Sin clave, el agente usa la herramienta `wyro_empezar` y crea una de prueba gratis. Con la clave de prueba todo es simulado y devuelve un link de vista previa.
@@ -39,21 +39,21 @@ Sin clave, el agente usa la herramienta `wyro_empezar` y crea una de prueba grat
 ```toml
 # ~/.codex/config.toml (con WYRO_API_KEY exportada)
 [mcp_servers.wyro]
-url = "https://wyroapi.vercel.app/mcp"
+url = "https://wyroapi.com/mcp"
 bearer_token_env_var = "WYRO_API_KEY"
 ```
 
 ### Cursor
 
 ```json
-{ "mcpServers": { "wyro": { "url": "https://wyroapi.vercel.app/mcp", "headers": { "Authorization": "Bearer wyro_sk_..." } } } }
+{ "mcpServers": { "wyro": { "url": "https://wyroapi.com/mcp", "headers": { "Authorization": "Bearer wyro_sk_..." } } } }
 ```
 
 ### API REST
 
 ```bash
-curl -X POST https://wyroapi.vercel.app/v1/sandbox          # clave de prueba, sin registro
-curl -X POST https://wyroapi.vercel.app/v1/posts \
+curl -X POST https://wyroapi.com/v1/sandbox          # clave de prueba, sin registro
+curl -X POST https://wyroapi.com/v1/posts \
   -H "Authorization: Bearer wyro_sk_..." -H "Content-Type: application/json" \
   -d '{"text":"Hola desde mi agente","platforms":["linkedin"]}'
 ```
@@ -83,11 +83,11 @@ Pídele al agente que conecte tu cuenta: te da un link, entras con Google o tu e
 
 ## Guías
 
-- [Publicar en Instagram desde Claude Code](https://wyroapi.vercel.app/blog/instagram-desde-claude-code)
-- [Programar posts de Instagram desde Codex o Cursor](https://wyroapi.vercel.app/blog/programar-posts-instagram-codex-cursor)
-- [MCP para publicar en LinkedIn](https://wyroapi.vercel.app/blog/mcp-linkedin)
-- [Publicar en TikTok por API sin auditoría](https://wyroapi.vercel.app/blog/tiktok-api-sin-auditoria)
-- [Instagram, TikTok y LinkedIn con n8n](https://wyroapi.vercel.app/blog/n8n-instagram-tiktok-linkedin)
+- [Publicar en Instagram desde Claude Code](https://wyroapi.com/blog/instagram-desde-claude-code)
+- [Programar posts de Instagram desde Codex o Cursor](https://wyroapi.com/blog/programar-posts-instagram-codex-cursor)
+- [MCP para publicar en LinkedIn](https://wyroapi.com/blog/mcp-linkedin)
+- [Publicar en TikTok por API sin auditoría](https://wyroapi.com/blog/tiktok-api-sin-auditoria)
+- [Instagram, TikTok y LinkedIn con n8n](https://wyroapi.com/blog/n8n-instagram-tiktok-linkedin)
 
 ## Ayuda
 

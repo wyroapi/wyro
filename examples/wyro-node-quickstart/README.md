@@ -1,6 +1,6 @@
 # wyro · Node.js quickstart
 
-Publica en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest desde Node.js con [wyro](https://wyroapi.vercel.app). Sin dependencias: solo `fetch`.
+Publica en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest desde Node.js con [wyro](https://wyroapi.com). Sin dependencias: solo `fetch`.
 
 ## En 30 segundos
 
@@ -26,7 +26,7 @@ npm start
 
 La respuesta trae `next_step` con el link para conectar tu cuenta real. Al conectarla, la misma clave publica de verdad.
 
-- Documentación: https://wyroapi.vercel.app/docs/empezar
-- Referencia para agentes: https://wyroapi.vercel.app/llms.txt
+- Documentación: https://wyroapi.com/docs/empezar
+- Referencia para agentes: https://wyroapi.com/llms.txt
 
 MIT

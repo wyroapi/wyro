@@ -1,6 +1,6 @@
 {
   "name": "wyro",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Publica y programa posts en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest desde Claude Code. Prueba gratis sin registro, con vista previa de cada post.",
   "author": {
     "name": "wyro"
@@ -16,6 +16,6 @@
     "redes sociales"
   ],
   "icon": ".claude-plugin/icon.png",
-  "homepage": "https://wyroapi.vercel.app",
-  "privacyPolicyUrl": "https://wyroapi.vercel.app/privacidad"
+  "homepage": "https://wyroapi.com",
+  "privacyPolicyUrl": "https://wyroapi.com/privacidad"
 }
