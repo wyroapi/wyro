@@ -2,6 +2,8 @@
 
 Publica en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest desde tus flujos de n8n, sin crear apps de Meta ni TikTok. Usa la API de [wyro](https://wyroapi.com).
 
+> **¿Prefieres un nodo?** En n8n self-hosted: **Settings → Community Nodes → Install** → `@wyroapi/n8n-nodes-wyro`. Trae Publicar, Estado del post y Conectar cuenta, y sirve como herramienta de un AI Agent.
+
 ## Usarla
 
 1. Crea una clave de prueba gratis (sin registro):
