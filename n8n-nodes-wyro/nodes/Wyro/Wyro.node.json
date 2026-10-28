@@ -1,0 +1,18 @@
+{
+	"node": "@wyroapi/n8n-nodes-wyro.wyro",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Marketing & Content", "Communication"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://github.com/wyroapi/wyro/tree/main/n8n-nodes-wyro#credentials"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://wyroapi.com/n8n"
+			}
+		]
+	}
+}

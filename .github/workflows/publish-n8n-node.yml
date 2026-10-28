@@ -1,0 +1,46 @@
+# Publishes n8n-nodes-wyro/ to npm (@wyroapi/n8n-nodes-wyro) with a provenance statement, as n8n requires
+# for verified community nodes since May 1 2026. Auth is npm Trusted Publishing (OIDC): this file is the
+# trusted publisher configured on npmjs.com, so no NPM_TOKEN is needed.
+#
+# To release: bump "version" in n8n-nodes-wyro/package.json, commit, then push a tag
+# `n8n-nodes-wyro-v<version>` (or run this workflow by hand from the Actions tab).
+name: publish-n8n-node
+
+on:
+  push:
+    tags:
+      - 'n8n-nodes-wyro-v*'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      # Required to mint the OIDC token for trusted publishing and the provenance attestation.
+      id-token: write
+      contents: read
+    defaults:
+      run:
+        working-directory: n8n-nodes-wyro
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+          cache-dependency-path: n8n-nodes-wyro/package-lock.json
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Trusted publishing needs npm 11.5.1 or later.
+      - name: Update npm
+        run: npm install -g npm@latest
+
+      - name: Release
+        # In GitHub Actions, `n8n-node release` lints, builds and runs `npm publish` with provenance.
+        run: npm run release
