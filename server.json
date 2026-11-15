@@ -2,13 +2,13 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.wyroapi/wyro",
   "title": "wyro API",
-  "description": "Publica en Instagram, TikTok, LinkedIn, X y más desde tu agente. En español, prueba sin registro.",
+  "description": "Lets Claude and AI agents post and schedule on Instagram, TikTok, LinkedIn and 5 more networks.",
   "websiteUrl": "https://wyroapi.com",
   "repository": {
     "url": "https://github.com/wyroapi/wyro",
     "source": "github"
   },
-  "version": "0.1.2",
+  "version": "0.1.3",
   "packages": [
     {
       "registryType": "npm",
@@ -30,11 +30,11 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://wyroapi.com/mcp",
+      "url": "https://wyroapi.com/mcp?src=registry",
       "headers": [
         {
           "name": "Authorization",
-          "description": "Bearer <clave>. Crea una gratis con POST /v1/sandbox",
+          "description": "Bearer <key>. Optional: without it, wyro_empezar creates a free test key.",
           "isRequired": false,
           "isSecret": true
         }
