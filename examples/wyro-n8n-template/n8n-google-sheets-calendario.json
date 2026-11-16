@@ -1,0 +1,268 @@
+{
+  "name": "Calendario de contenido en Google Sheets con wyro",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Tu calendario de contenido en Google Sheets\nCada hora n8n lee las filas con `estado` = `pendiente`, las programa con wyro y marca la fila como `programado` con el id del post.\n\n**Tu hoja necesita estas columnas (fila 1):**\n`texto` · `redes` · `imagen_url` · `fecha_hora` · `estado` · `post_id`\n- `redes`: separadas por coma, por ejemplo `instagram, linkedin`.\n- `imagen_url`: URL pública https (opcional; Instagram y Pinterest la necesitan).\n- `fecha_hora`: ISO 8601 con zona, por ejemplo `2026-12-01T15:00:00-03:00`. Formatea la columna como texto sin formato. Si la dejas vacía, se publica ya.\n- `estado`: escribe `pendiente` en las filas a programar.\n\n**Configúrala**\n1. Conecta tu cuenta de Google y elige el documento y la hoja en los 3 nodos de Google Sheets.\n2. Si una fila falla (por ejemplo, Instagram sin imagen), queda con `estado` = `error`.\n\n**Tu clave de wyro**\n1. Crea una clave de prueba gratis (sin registro):\n`curl -X POST https://wyroapi.com/v1/sandbox`\n2. En el nodo **Publicar con wyro** crea una credencial **Header Auth**: Name `Authorization`, Value `Bearer wyro_sk_…`.\nCon la clave de prueba todo es simulado y cada post trae un `preview_url` para verlo. Para publicar de verdad, conecta tu cuenta con el link de `next_step`.\n\n¿Prefieres un nodo? En n8n self-hosted: Settings → Community Nodes → `@wyroapi/n8n-nodes-wyro`.",
+        "width": 400,
+        "height": 760,
+        "color": 4
+      },
+      "id": "bf63451e-069f-4ae0-8a1e-98d8b9f4e3d3",
+      "name": "Nota: cómo configurarla",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -440,
+        -300
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "id": "a736435a-98df-471c-9381-010715ea3a2f",
+      "name": "Cada hora",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "estado",
+              "lookupValue": "pendiente"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0347ad12-edd1-4d5a-b7b7-499e0e05ea18",
+      "name": "Leer filas pendientes",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://wyroapi.com/v1/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify(Object.assign(\n  {\n    text: $json.texto,\n    platforms: String($json.redes || '').split(',').map(r => r.trim().toLowerCase()).filter(Boolean)\n  },\n  $json.imagen_url ? { media: [{ url: String($json.imagen_url).trim() }] } : {},\n  $json.fecha_hora ? { scheduled_at: String($json.fecha_hora).trim() } : {}\n)) }}",
+        "options": {}
+      },
+      "id": "6a522df4-5051-4c50-ac7f-27edb2bf5947",
+      "name": "Publicar con wyro",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Leer filas pendientes').item.json.row_number }}",
+            "estado": "programado",
+            "post_id": "={{ $json.id }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "estado",
+              "displayName": "estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "post_id",
+              "displayName": "post_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "478bae1f-824e-4e09-a979-bf4f0f0f111c",
+      "name": "Marcar como programado",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        760,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('Leer filas pendientes').item.json.row_number }}",
+            "estado": "error"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "estado",
+              "displayName": "estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "post_id",
+              "displayName": "post_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "edcd2934-d585-49bf-93fd-6d99c85b1623",
+      "name": "Marcar error",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        760,
+        120
+      ]
+    }
+  ],
+  "connections": {
+    "Cada hora": {
+      "main": [
+        [
+          {
+            "node": "Leer filas pendientes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer filas pendientes": {
+      "main": [
+        [
+          {
+            "node": "Publicar con wyro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Publicar con wyro": {
+      "main": [
+        [
+          {
+            "node": "Marcar como programado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Marcar error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

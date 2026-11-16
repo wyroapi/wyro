@@ -1,0 +1,111 @@
+{
+  "name": "Anunciar las notas de tu blog en LinkedIn y X con wyro",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Tu blog publica una nota y tus redes la anuncian solas\nCada hora n8n revisa el RSS de tu blog. Por cada nota nueva arma «título + link» y la publica en LinkedIn y X.\n\n**Configúrala**\n1. En **Nueva nota en el blog (RSS)** pega la URL del feed (por ejemplo `https://tu-blog.com/feed`).\n2. En **Armar el texto** ajusta el formato. El título se corta en 200 caracteres para entrar en los 280 de X.\n3. En **Publicar con wyro** cambia las redes en `platforms`: instagram, facebook, tiktok, linkedin, x, threads, youtube, pinterest. Instagram y Pinterest necesitan imagen; TikTok y YouTube, video.\n4. Activa el flujo.\n\n**Tu clave de wyro**\n1. Crea una clave de prueba gratis (sin registro):\n`curl -X POST https://wyroapi.com/v1/sandbox`\n2. En el nodo **Publicar con wyro** crea una credencial **Header Auth**: Name `Authorization`, Value `Bearer wyro_sk_…`.\nCon la clave de prueba todo es simulado y cada post trae un `preview_url` para verlo. Para publicar de verdad, conecta tu cuenta con el link de `next_step`.\n\n¿Prefieres un nodo? En n8n self-hosted: Settings → Community Nodes → `@wyroapi/n8n-nodes-wyro`.",
+        "width": 380,
+        "height": 620,
+        "color": 4
+      },
+      "id": "dbc701c8-866a-41f6-89fc-8c7220f9d346",
+      "name": "Nota: cómo configurarla",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        -260
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        },
+        "feedUrl": "https://tu-blog.com/feed"
+      },
+      "id": "cff9ede1-68c6-4d60-b04b-d0e717befab4",
+      "name": "Nueva nota en el blog (RSS)",
+      "type": "n8n-nodes-base.rssFeedReadTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "41afaef1-4d25-48a1-8865-5fea7fae4f8f",
+              "name": "texto",
+              "value": "={{ String($json.title || '').slice(0, 200) }}\n\n{{ $json.link }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "200af6bf-0d0b-4d48-89be-b3b256ffaeee",
+      "name": "Armar el texto",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://wyroapi.com/v1/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"text\": {{ JSON.stringify($json.texto) }}, \"platforms\": [\"linkedin\", \"x\"]}",
+        "options": {}
+      },
+      "id": "e366ba7c-ac55-48d2-94e7-56a5bf48a653",
+      "name": "Publicar con wyro",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Nueva nota en el blog (RSS)": {
+      "main": [
+        [
+          {
+            "node": "Armar el texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Armar el texto": {
+      "main": [
+        [
+          {
+            "node": "Publicar con wyro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
