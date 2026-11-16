@@ -1,0 +1,239 @@
+{
+  "name": "La IA escribe y publica en Instagram con wyro",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## La IA escribe el post y lo publica en Instagram\nLe das un tema; Claude escribe el texto y n8n lo manda a Instagram con una imagen.\n\n**Configúrala**\n1. En **Tema y foto del post** escribe el tema y la URL pública de tu imagen (la de ejemplo sirve para probar).\n2. En **Modelo de Claude** crea una credencial de Anthropic con tu API key. Puedes cambiarlo por el modelo de OpenAI o Gemini.\n3. Haz clic en **Probar flujo** y abre `preview_url` en **Ver vista previa** para ver cómo queda.\n4. Cuando te guste, usa tu clave real y activa el flujo: **Cada día a las 9** publica uno nuevo cada día.\n\n**Tu clave de wyro**\n1. Crea una clave de prueba gratis (sin registro):\n`curl -X POST https://wyroapi.com/v1/sandbox`\n2. En el nodo **Publicar con wyro** crea una credencial **Header Auth**: Name `Authorization`, Value `Bearer wyro_sk_…`.\nCon la clave de prueba todo es simulado y cada post trae un `preview_url` para verlo. Para publicar de verdad, conecta tu cuenta con el link de `next_step`.\n**Ojo:** con la clave de prueba nada sale a Instagram; la respuesta trae `simulated: true`.\n\n¿Prefieres un nodo? En n8n self-hosted: Settings → Community Nodes → `@wyroapi/n8n-nodes-wyro`.",
+        "width": 400,
+        "height": 700,
+        "color": 4
+      },
+      "id": "69da0a4d-dc00-4483-b9c4-bcc7eb7b1670",
+      "name": "Nota: cómo configurarla",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        -320
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "ffa2bbdd-bc8b-4b17-a0f2-26037545feb4",
+      "name": "Cuando hago clic en Probar",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "id": "a71889fb-9077-41a8-af65-2d6828c71f0c",
+      "name": "Cada día a las 9",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cf464548-06e0-4838-8b47-3e78520ff180",
+              "name": "tema",
+              "value": "3 errores comunes al publicar en redes y cómo evitarlos",
+              "type": "string"
+            },
+            {
+              "id": "dadb0d92-c166-45b6-b703-7ea3ebd1d85d",
+              "name": "imagen_url",
+              "value": "https://wyroapi.com/social/instagram/reels/portada-hg-lunes.jpg",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "513245f3-acc0-4044-861d-10aec7c7709d",
+      "name": "Tema y foto del post",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Escribe un post para Instagram sobre: {{ $json.tema }}\n\nEn español, tono cercano, máximo 1500 caracteres, con 3 a 5 hashtags al final. Responde solo con el texto del post, sin comillas ni explicaciones."
+      },
+      "id": "53f73631-4236-424d-a1a8-038f9cb27cc9",
+      "name": "La IA escribe el post",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        480,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-opus-5-5",
+          "cachedResultName": "Claude Opus 5.5"
+        },
+        "options": {}
+      },
+      "id": "ca7de2cd-be0d-45cd-8c69-d6c5c5fb87a0",
+      "name": "Modelo de Claude",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        480,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://wyroapi.com/v1/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"text\": {{ JSON.stringify($json.text) }}, \"platforms\": [\"instagram\"], \"media\": [{\"url\": {{ JSON.stringify($('Tema y foto del post').item.json.imagen_url) }}}]}",
+        "options": {}
+      },
+      "id": "b4802d46-6f35-431c-af90-abd7df681fc8",
+      "name": "Publicar con wyro",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        800,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "da17df7f-b640-4216-b4cd-225c839d93f5",
+              "name": "preview_url",
+              "value": "={{ $json.preview_url }}",
+              "type": "string"
+            },
+            {
+              "id": "9163a9ba-2fbc-41d2-8a87-f118b54608ff",
+              "name": "estado",
+              "value": "={{ $json.status }}",
+              "type": "string"
+            },
+            {
+              "id": "695ae09a-142c-4bff-8f4b-c3b1f24f981e",
+              "name": "simulado",
+              "value": "={{ $json.simulated }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "58b1c4fa-c8c0-4c4b-8110-be767dde244f",
+      "name": "Ver vista previa",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1040,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Cuando hago clic en Probar": {
+      "main": [
+        [
+          {
+            "node": "Tema y foto del post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cada día a las 9": {
+      "main": [
+        [
+          {
+            "node": "Tema y foto del post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tema y foto del post": {
+      "main": [
+        [
+          {
+            "node": "La IA escribe el post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Modelo de Claude": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "La IA escribe el post",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "La IA escribe el post": {
+      "main": [
+        [
+          {
+            "node": "Publicar con wyro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Publicar con wyro": {
+      "main": [
+        [
+          {
+            "node": "Ver vista previa",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
