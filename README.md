@@ -1,4 +1,4 @@
-# wyro API: social media MCP server and API for AI agents
+# wyro API: the connector that lets Claude post on Instagram, TikTok and LinkedIn
 
 [![npm @wyroapi/mcp](https://img.shields.io/npm/v/@wyroapi/mcp?label=%40wyroapi%2Fmcp)](https://www.npmjs.com/package/@wyroapi/mcp)
 [![npm @wyroapi/wyro](https://img.shields.io/npm/v/@wyroapi/wyro?label=CLI%20%40wyroapi%2Fwyro)](https://www.npmjs.com/package/@wyroapi/wyro)
@@ -6,9 +6,11 @@
 [![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/wyroapi/wyro)
 [![License: MIT](https://img.shields.io/badge/license-MIT-black)](LICENSE)
 
-Publica y programa posts en **Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest** desde tu agente de IA (**Claude Code, Codex, Cursor, n8n**). Servidor MCP remoto, API REST y CLI. En español, y se prueba sin registro.
+**wyro es el conector que le permite a Claude publicar y programar posts en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest.** Pegas un link en Claude (web, escritorio o Cowork: Personalizar → Conectores → Agregar conector personalizado) y le pides «publica esto mañana a las 10». Nada sale en tu cuenta sin tu «sí». Guía de 1 minuto: https://wyroapi.com/guia
 
-*English: a remote MCP server and REST API that lets AI agents post and schedule content on 8 social networks. Free sandbox key, no sign-up. → https://wyroapi.com/en*
+También funciona en Claude Code, Codex, Cursor y n8n, como servidor MCP remoto, API REST y CLI. En español, y se prueba gratis sin registro: las publicaciones de prueba son simuladas y devuelven una vista previa.
+
+*English: wyro is the connector that lets Claude (and other AI agents) post and schedule on 8 social networks. Add it to Claude as a custom connector, or use it as a remote MCP server or REST API. Free sandbox key, no sign-up. → https://wyroapi.com/en*
 
 - Web y docs: https://wyroapi.com
 - Guía para agentes: https://wyroapi.com/AGENTS.md · [llms.txt](https://wyroapi.com/llms.txt) · [OpenAPI](https://wyroapi.com/openapi.json)
@@ -17,6 +19,12 @@ Publica y programa posts en **Instagram, Facebook, TikTok, LinkedIn, X, Threads,
 - CLI: `npx @wyroapi/wyro init`
 
 ## Empezar en 1 minuto
+
+### Claude (web, escritorio o Cowork)
+
+1. Copia tu link de conector en https://wyroapi.com/guia (gratis, sin registro).
+2. En Claude: **Personalizar → Conectores → Agregar conector personalizado**. Nombre: `wyro`. URL: tu link.
+3. En un chat nuevo: «Acabo de instalar wyro, ¿cómo funciona?».
 
 ### Claude Code
 
