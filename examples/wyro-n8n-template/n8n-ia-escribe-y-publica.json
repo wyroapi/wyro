@@ -117,7 +117,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\"text\": {{ JSON.stringify($json.text) }}, \"platforms\": [\"instagram\"], \"media\": [{\"url\": {{ JSON.stringify($('Tema y foto del post').item.json.imagen_url) }}}]}",
+        "jsonBody": "={\"text\": {{ JSON.stringify($json.text) }}, \"platforms\": [\"instagram\"], \"media\": [{\"url\": {{ JSON.stringify($('Tema y foto del post').first().json.imagen_url) }}}]}",
         "options": {}
       },
       "id": "b4802d46-6f35-431c-af90-abd7df681fc8",
