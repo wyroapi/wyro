@@ -1,7 +1,7 @@
 {
   "name": "wyro",
-  "version": "0.1.1",
-  "description": "Publica y programa posts en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest desde Claude Code. Prueba gratis sin registro, con vista previa de cada post.",
+  "version": "0.2.0",
+  "description": "Publica y programa posts en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest desde Claude Code. Te conectas con tu cuenta de wyro (sin copiar claves), con vista previa de cada post.",
   "author": {
     "name": "wyro"
   },
@@ -13,9 +13,15 @@
     "linkedin",
     "mcp",
     "publicar",
-    "redes sociales"
+    "redes sociales",
+    "programar posts",
+    "calendario de contenido",
+    "agentes de ia"
   ],
   "icon": ".claude-plugin/icon.png",
   "homepage": "https://wyroapi.com",
-  "privacyPolicyUrl": "https://wyroapi.com/privacidad"
+  "privacyPolicyUrl": "https://wyroapi.com/privacidad",
+  "repository": "https://github.com/wyroapi/wyro",
+  "termsOfServiceUrl": "https://wyroapi.com/terminos",
+  "documentationUrl": "https://wyroapi.com/docs"
 }

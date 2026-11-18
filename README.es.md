@@ -28,7 +28,7 @@ También funciona en Claude Code, Codex, Cursor y n8n, como servidor MCP remoto,
 
 ### Claude Code
 
-Con el plugin (MCP, skill y el comando `/wyro:publicar`):
+Con el plugin: MCP con tu cuenta de wyro (escribe `/mcp` → wyro, sin copiar claves), una skill y los comandos `/wyro:publicar`, `/wyro:semana`, `/wyro:conectar` y `/wyro:cola`:
 
 ```
 /plugin marketplace add wyroapi/wyro

@@ -2,8 +2,7 @@
   "mcpServers": {
     "wyro": {
       "type": "http",
-      "url": "https://wyroapi.com/mcp",
-      "headers": { "Authorization": "Bearer ${WYRO_API_KEY}" }
+      "url": "https://wyroapi.com/mcp/auth"
     }
   }
 }

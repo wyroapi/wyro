@@ -1,6 +1,6 @@
 # wyro para Claude Code
 
-Publica y programa posts en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest desde Claude Code.
+Publica y programa posts en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube y Pinterest desde Claude Code, con vista previa de cada post.
 
 ## Instalar
 
@@ -9,16 +9,29 @@ Publica y programa posts en Instagram, Facebook, TikTok, LinkedIn, X, Threads, Y
 /plugin install wyro@wyro
 ```
 
-## Clave
+Desde la terminal: `claude plugin install wyro --marketplace wyroapi/wyro`.
 
-Crea una clave de prueba gratis (sin registro): `curl -X POST https://wyroapi.com/v1/sandbox`, o pídele a Claude: "empieza con wyro".
-Guárdala en tu entorno como `WYRO_API_KEY` y reinicia Claude Code.
+## Conectar tu cuenta
 
-## Uso
+Escribe `/mcp`, elige **wyro** y entra con Google o con tu email. No copias ninguna clave. La primera vez se crea tu cuenta gratis, en modo de prueba: todo simulado, con vista previa. Para publicar de verdad, conecta tu red con `/wyro:conectar instagram`.
 
-- "Publica en LinkedIn: lanzamos algo nuevo, y muéstrame la vista previa"
-- `/wyro:publicar Hola desde mi agente en instagram` (con una imagen)
+## Comandos
 
-Con la clave de prueba todo es simulado y devuelve un link de vista previa. Para publicar de verdad, conecta tu cuenta con el link que te da `wyro_conectar_cuenta`.
+| Comando | Qué hace |
+| - | - |
+| `/wyro:publicar <texto> en <redes>` | Publica o programa un post, con vista previa y tu confirmación |
+| `/wyro:semana <tema>` | Planifica y programa una semana de posts, adaptados a cada red |
+| `/wyro:conectar <red>` | Te da el link para conectar tu cuenta real con el login oficial de la red |
+| `/wyro:cola` | Muestra los próximos horarios libres de tu cola |
 
-Más: https://wyroapi.com/AGENTS.md · MIT
+También puedes pedirlo con tus palabras: «programa esto en LinkedIn mañana a las 10 y en X con una versión más corta».
+
+## ¿Prefieres una clave?
+
+Si ya tienes una clave de wyro (`wyro_sk_…`), puedes usar el MCP con ella en lugar del plugin:
+
+```
+claude mcp add --transport http wyro https://wyroapi.com/mcp --header "Authorization: Bearer $WYRO_API_KEY"
+```
+
+Guía: https://wyroapi.com/guia · Documentación: https://wyroapi.com/docs · MIT
