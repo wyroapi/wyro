@@ -1,18 +1,25 @@
 ---
 name: wyro
-description: Publica o programa posts en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube o Pinterest con wyro. Úsala cuando el usuario pida publicar, programar o probar contenido en redes sociales. No la uses para leer métricas.
+description: Publica, programa o planifica posts en Instagram, Facebook, TikTok, LinkedIn, X, Threads, YouTube o Pinterest con wyro. Úsala cuando el usuario pida publicar, programar, armar la semana de contenido, conectar una red o ver qué tiene programado. No la uses para leer métricas.
 ---
 
 # Publicar en redes con wyro
 
-1. **Clave.** Si las herramientas `wyro_*` dicen que falta la clave, llama a `wyro_empezar`: crea una clave de prueba gratis (72 horas, todo simulado). Pídele al usuario que la guarde como `WYRO_API_KEY` en su entorno y reinicie Claude Code. Mientras tanto puedes usar la API REST con esa clave: `POST https://wyroapi.com/v1/posts` con el header `Authorization: Bearer <clave>`.
-2. **Cuentas.** `wyro_cuentas` muestra a qué redes puedes publicar (simuladas en modo prueba).
-3. **Publicar.** `wyro_publicar` con `texto`, `redes` y, si hace falta, `medios` (URLs públicas). Instagram y Pinterest necesitan imagen o video; TikTok y YouTube, video.
-4. **Mostrar.** Siempre muéstrale al usuario el `preview_url` que devuelve.
-5. **Real.** Para publicar de verdad, `wyro_conectar_cuenta` devuelve el link que el usuario abre para conectar su cuenta. La misma clave pasa a real.
+## Conexión
+- Las herramientas `wyro_*` vienen del servidor MCP del plugin, que se autoriza con la cuenta de wyro del usuario. Si responden que falta iniciar sesión, dile que escriba `/mcp`, elija **wyro** y entre con Google o con su email (la primera vez se crea su cuenta, gratis, en modo de prueba). Nunca le pidas una clave ni que la pegue en el chat.
+- `wyro_cuentas` lista sus redes. En modo de prueba son simuladas; para publicar de verdad, `wyro_conectar_cuenta` con la red devuelve un link que el usuario abre para autorizar con el login oficial de la red.
 
-Reglas:
-- Nunca publiques en una cuenta real sin confirmación explícita del usuario (envía `confirmar: true` solo después de esa confirmación).
-- Si hay un error, sigue su campo "Cómo arreglarlo".
+## Publicar
+- `wyro_publicar` con `texto`, `redes` (o las cuentas) y `medios` (URLs públicas). Instagram y Pinterest necesitan imagen o video; TikTok y YouTube, video.
+- **Programar:** `programar_para` en ISO 8601 con zona horaria (pregunta la zona si no la sabes), o `a_la_cola: true` para el próximo horario libre de su cola (`wyro_cuentas` con `ver_cola: true` muestra los próximos horarios).
+- **Texto distinto por red:** `textos_por_red`, por ejemplo `{"linkedin": "versión profesional", "x": "versión de 280"}`. Respeta el largo de cada red.
+- **Primer comentario:** `primer_comentario` (Instagram, Facebook, LinkedIn, Threads, YouTube), ideal para links o hashtags.
+- Siempre muéstrale el `preview_url` de cada red.
 
-Guía completa: https://wyroapi.com/AGENTS.md
+## Reglas
+- En una cuenta real, primero muestra cómo va a quedar y publica solo después de un «sí» explícito: recién ahí envía `confirmar: true`.
+- Si wyro avisa que el post está duplicado, pregúntale si lo quiere igual antes de mandar `permitir_duplicado: true`.
+- Si hay un error, sigue su campo «Cómo arreglarlo» y explícaselo en una frase.
+- Responde en el idioma del usuario.
+
+Guía completa y prompts: https://wyroapi.com/guia · Para agentes: https://wyroapi.com/AGENTS.md
