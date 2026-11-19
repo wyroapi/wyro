@@ -26,12 +26,8 @@ Escribe `/mcp`, elige **wyro** y entra con Google o con tu email. No copias ning
 
 También puedes pedirlo con tus palabras: «programa esto en LinkedIn mañana a las 10 y en X con una versión más corta».
 
-## ¿Prefieres una clave?
+## Qué datos envía
 
-Si ya tienes una clave de wyro (`wyro_sk_…`), puedes usar el MCP con ella en lugar del plugin:
-
-```
-claude mcp add --transport http wyro https://wyroapi.com/mcp --header "Authorization: Bearer $WYRO_API_KEY"
-```
+El plugin solo habla con wyro (`https://wyroapi.com/mcp/auth`), el conector que declara. Le envía el texto y los medios que pides publicar, las redes elegidas y la fecha si lo programas; wyro devuelve tus cuentas, el estado de cada post y sus métricas. Entras con tu cuenta de wyro (OAuth): el plugin no lee claves ni archivos de tu máquina. Privacidad: https://wyroapi.com/en/privacy
 
 Guía: https://wyroapi.com/guia · Documentación: https://wyroapi.com/docs · MIT
