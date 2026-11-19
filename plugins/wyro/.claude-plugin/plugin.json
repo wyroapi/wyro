@@ -20,8 +20,6 @@
   ],
   "icon": ".claude-plugin/icon.png",
   "homepage": "https://wyroapi.com",
-  "privacyPolicyUrl": "https://wyroapi.com/privacidad",
-  "repository": "https://github.com/wyroapi/wyro",
-  "termsOfServiceUrl": "https://wyroapi.com/terminos",
-  "documentationUrl": "https://wyroapi.com/docs"
+  "privacyPolicyUrl": "https://wyroapi.com/en/privacy",
+  "repository": "https://github.com/wyroapi/wyro"
 }
