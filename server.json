@@ -2,13 +2,13 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.wyroapi/wyro",
   "title": "wyro API",
-  "description": "Lets Claude and AI agents post and schedule on Instagram, TikTok, LinkedIn and 5 more networks.",
+  "description": "Lets Claude and AI agents post, schedule and measure on Instagram, TikTok, LinkedIn and 5 more.",
   "websiteUrl": "https://wyroapi.com",
   "repository": {
     "url": "https://github.com/wyroapi/wyro",
     "source": "github"
   },
-  "version": "0.1.4",
+  "version": "0.1.5",
   "packages": [
     {
       "registryType": "npm",
@@ -20,7 +20,7 @@
       "environmentVariables": [
         {
           "name": "WYRO_API_KEY",
-          "description": "Tu clave wyro_sk_... Sin ella solo funciona wyro_empezar, que crea una gratis.",
+          "description": "Your wyro_sk_... key. Without it only wyro_empezar works, which creates a free one.",
           "isRequired": false,
           "isSecret": true
         }
@@ -28,6 +28,10 @@
     }
   ],
   "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://wyroapi.com/mcp/auth?src=registry"
+    },
     {
       "type": "streamable-http",
       "url": "https://wyroapi.com/mcp?src=registry",
