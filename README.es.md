@@ -3,6 +3,7 @@
 [English](README.md) · **Español** · [Português](README.pt.md)
 
 [![npm @wyroapi/mcp](https://img.shields.io/npm/v/@wyroapi/mcp?label=%40wyroapi%2Fmcp)](https://www.npmjs.com/package/@wyroapi/mcp)
+[![wyroapi/wyro MCP server](https://glama.ai/mcp/servers/wyroapi/wyro/badges/score.svg)](https://glama.ai/mcp/servers/wyroapi/wyro)
 [![npm @wyroapi/wyro](https://img.shields.io/npm/v/@wyroapi/wyro?label=CLI%20%40wyroapi%2Fwyro)](https://www.npmjs.com/package/@wyroapi/wyro)
 [![MCP Registry](https://img.shields.io/badge/MCP%20Registry-io.github.wyroapi%2Fwyro-2440E6)](https://registry.modelcontextprotocol.io/v0/servers?search=io.github.wyroapi/wyro)
 [![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/wyroapi/wyro)
